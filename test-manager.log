@@ -3474,3 +3474,27 @@ Caused by: org.hibernate.MappingException: Could not determine type for: java.aw
 2022-06-06 03:19:31.409  INFO 920 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2022-06-06 03:19:31.580  INFO 920 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2022-06-06 03:19:31.690  INFO 920 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-06-06 18:53:54.826  INFO 4272 --- [main] .HotelReservationProjectApplicationTests : Starting HotelReservationProjectApplicationTests using Java 18.0.1.1 on WIN-N3BL5B485HN with PID 4272 (started by User in C:\Users\User\IdeaProjects\hotel-reservation-project)
+2022-06-06 18:53:54.832  INFO 4272 --- [main] .HotelReservationProjectApplicationTests : No active profile set, falling back to 1 default profile: "default"
+2022-06-06 18:53:57.386  INFO 4272 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-06-06 18:53:57.451  INFO 4272 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 41 ms. Found 0 JPA repository interfaces.
+2022-06-06 18:53:58.998  INFO 4272 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-06-06 18:53:59.161  INFO 4272 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.9.Final
+2022-06-06 18:53:59.809  INFO 4272 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-06-06 18:54:00.233  INFO 4272 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-06-06 18:54:01.566  INFO 4272 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-06-06 18:54:01.625  INFO 4272 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2022-06-06 18:54:04.919  INFO 4272 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-06-06 18:54:04.945  INFO 4272 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-06-06 18:54:05.964  WARN 4272 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-06-06 18:54:07.514  WARN 4272 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: e7c498d8-df07-4db9-95c1-2b48a905e137
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2022-06-06 18:54:08.063  INFO 4272 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@67f0bf7e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@e88e14, org.springframework.security.web.context.SecurityContextPersistenceFilter@52c27d53, org.springframework.security.web.header.HeaderWriterFilter@7d2be319, org.springframework.security.web.csrf.CsrfFilter@3d2b13f, org.springframework.security.web.authentication.logout.LogoutFilter@7ee3a2ed, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4cbb11e4, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@fe09374, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@c157abf, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@c6d7256, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@fb42c1c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4edde05c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@472dbaf5, org.springframework.security.web.session.SessionManagementFilter@64381526, org.springframework.security.web.access.ExceptionTranslationFilter@73fe7483, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@392ef4ff]
+2022-06-06 18:54:08.290  INFO 4272 --- [main] .HotelReservationProjectApplicationTests : Started HotelReservationProjectApplicationTests in 14.228 seconds (JVM running for 17.994)
+2022-06-06 18:54:09.102  INFO 4272 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-06-06 18:54:09.106  INFO 4272 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-06-06 18:54:09.134  INFO 4272 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
