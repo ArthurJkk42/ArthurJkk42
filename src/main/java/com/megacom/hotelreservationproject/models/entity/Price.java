@@ -12,7 +12,7 @@ public class Price {
     @Id
     @GeneratedValue
     private Long id;
-    private String price;
+    private double price;
     private Date startDate;
     private Date endDate;
     @ManyToOne

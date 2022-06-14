@@ -14,11 +14,14 @@ public class Hotel {
     private String name;
     private String description;
     private String address;
-    //TODO
-//    private Image photos;
+    @ManyToOne
+    @JoinColumn(name = "photo_id")
+    private Photo photos;
     private String phone;
     private String email;
+    private boolean isActive;
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
+    private double currentScore;
 }

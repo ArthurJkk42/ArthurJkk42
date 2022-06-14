@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class PriceDto {
     private Long id;
-    private String price;
+    private double price;
     private Date startDate;
     private Date endDate;
     private Room room;

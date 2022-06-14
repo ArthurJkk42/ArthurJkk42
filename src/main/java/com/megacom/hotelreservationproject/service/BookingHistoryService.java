@@ -1,6 +1,9 @@
 package com.megacom.hotelreservationproject.service;
 
+import com.megacom.hotelreservationproject.models.dto.BookingDto;
 import com.megacom.hotelreservationproject.models.dto.BookingHistoryDto;
+
+import java.util.List;
 
 public interface BookingHistoryService {
 
@@ -8,9 +11,5 @@ public interface BookingHistoryService {
 
     BookingHistoryDto findById(Long id);
 
-    BookingHistoryDto update(BookingHistoryDto bookingHistoryDto);
-
-    BookingHistoryDto delete(BookingHistoryDto bookingHistoryDto);
-
-
+    List<BookingHistoryDto> findAllBookingHistoryByBooking(BookingDto bookingDto);
 }

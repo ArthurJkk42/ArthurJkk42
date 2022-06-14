@@ -1,21 +1,11 @@
-package com.megacom.hotelreservationproject.models.entity;
+package com.megacom.hotelreservationproject.models.dto;
 
 import com.megacom.hotelreservationproject.models.enums.EUserStatus;
 import com.megacom.hotelreservationproject.models.enums.EUserType;
-
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 @Data
-@Entity
-@Table(name = "tb_users")
-public class Users {
-    @Id
-    @GeneratedValue
+public class UserDto {
     private Long id;
     private String name;
     private String email;

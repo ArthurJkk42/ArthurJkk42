@@ -1,9 +1,9 @@
 package com.megacom.hotelreservationproject.models.dto;
 
 import com.megacom.hotelreservationproject.models.entity.City;
+import com.megacom.hotelreservationproject.models.entity.Photo;
 import lombok.Data;
 
-import java.awt.*;
 
 @Data
 public class HotelDto {
@@ -11,8 +11,9 @@ public class HotelDto {
     private String name;
     private String description;
     private String address;
-    private Image photos;
     private String phone;
     private String email;
+    private boolean isActive;
     private City city;
+    private double currentScore;
 }

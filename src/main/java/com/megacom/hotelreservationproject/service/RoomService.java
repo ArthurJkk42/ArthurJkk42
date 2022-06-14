@@ -1,6 +1,10 @@
 package com.megacom.hotelreservationproject.service;
 
 import com.megacom.hotelreservationproject.models.dto.RoomDto;
+import com.megacom.hotelreservationproject.models.enums.EBedType;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface RoomService {
 
@@ -8,9 +12,15 @@ public interface RoomService {
 
     RoomDto findById(Long id);
 
-    RoomDto findByHotelId(RoomDto roomDto);
-
     RoomDto update(RoomDto roomDto);
 
-    RoomDto delete(RoomDto roomDto);
+    List<RoomDto> filterByBedType(EBedType eBedType); // required
+
+    List<RoomDto> findByBooking(Long id);
+
+    List<RoomDto> findByHotelId(Long id);
+
+    List<RoomDto> findByHotelGuestId(Long id);
+
+
 }

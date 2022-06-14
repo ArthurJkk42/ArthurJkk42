@@ -1,5 +1,6 @@
 package com.megacom.hotelreservationproject.models.entity;
 
+import com.megacom.hotelreservationproject.models.enums.EBookingStatus;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,8 +22,9 @@ public class Booking {
     private Date checkOutDate;
     @ManyToOne
     @JoinColumn(name = "guest_id")
-    private Users users;
+    private User user;
     private String comment;
-    private boolean status;
-    private String sum;
+    @Enumerated(value = EnumType.STRING)
+    private EBookingStatus status;
+    private double sum;
 }

@@ -2,6 +2,8 @@ package com.megacom.hotelreservationproject.service;
 
 import com.megacom.hotelreservationproject.models.dto.PriceDto;
 
+import java.util.List;
+
 public interface PriceService {
 
     PriceDto save(PriceDto priceDto);
@@ -10,7 +12,11 @@ public interface PriceService {
 
     PriceDto findByRoomId(Long id);
 
+    PriceDto findByGuestId(Long id);
+
     PriceDto update(PriceDto priceDto);
 
-    PriceDto delete(PriceDto priceDto);
+    List<PriceDto> findPricesByHotel(Long id);
+
+    List<PriceDto> findPricesByCity();
 }

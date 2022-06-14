@@ -10,11 +10,11 @@ import lombok.Data;
 public class RoomDto {
     private Long id;
 
-    private long capacity;
+    private int capacity;
     private EBedType bedType;
     private String square;
     private boolean wifi;
     private EView view;
     private Hotel hotel;
-    private ERoomType type;
+    private ERoomType roomType;
 }
