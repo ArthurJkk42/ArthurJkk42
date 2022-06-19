@@ -19,6 +19,7 @@ public class ReviewResponseServiceImpl implements ReviewResponseService {
     private ReviewResponseDao reviewResponseDao;
     private ReviewDao reviewDao;
     private ReviewResponseService reviewResponseService;
+
     private ReviewResponseMapper reviewResponseMapper = ReviewResponseMapper.INSTANCE;
 
     @Override

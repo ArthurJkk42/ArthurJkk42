@@ -1,11 +1,7 @@
 package com.megacom.hotelreservationproject.controllers;
 
-import com.megacom.hotelreservationproject.models.dto.BookingDto;
-import com.megacom.hotelreservationproject.models.dto.HotelDto;
-import com.megacom.hotelreservationproject.models.dto.ReviewResponseDto;
-import com.megacom.hotelreservationproject.service.BookingService;
-import com.megacom.hotelreservationproject.service.HotelService;
-import com.megacom.hotelreservationproject.service.ReviewResponseService;
+import com.megacom.hotelreservationproject.models.dto.*;
+import com.megacom.hotelreservationproject.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,20 +15,41 @@ public class OwnerController {
     @Autowired
     private HotelService hotelService;
     private BookingService bookingService;
+    private CityService cityService;
+    private RoomService roomService;
     private ReviewResponseService reviewResponseService;
 
-    @PostMapping("/save")
-    public HotelDto save(@RequestBody HotelDto hotelDto) {
+    @PostMapping("/saveHotel")
+    public HotelDto saveHotel(@RequestBody HotelDto hotelDto) {
         return hotelService.save(hotelDto);
     }
 
-    @PostMapping("/cancel")
-    public BookingDto cancel(@RequestBody BookingDto bookingDto) {
+    @PostMapping("/saveRoom")
+    public RoomDto saveRoom(@RequestBody RoomDto roomDto) {
+        return roomService.save(roomDto);
+    }
+
+    @PostMapping("/saveCity")
+    public CityDto saveCity(@RequestBody CityDto cityDto) {
+        return cityService.save(cityDto);
+    }
+
+    @PostMapping("/uploadPhotos")
+    public PhotoDto uploadPhoto(@RequestBody PhotoDto photoDto) {
+        return null;
+    }
+
+    @PostMapping("/respondToReview")
+    public ReviewResponseDto respondToReview(@RequestBody ReviewResponseDto reviewResponseDto) {
+        return null;
+    }
+
+    @PostMapping("/cancelBooking")
+    public BookingDto cancelBooking(@RequestBody BookingDto bookingDto) {
         return bookingService.cancelBookingByOwner(bookingDto);
     }
 
-    @PostMapping("/respond")
-    public ReviewResponseDto respond(@RequestBody ReviewResponseDto reviewResponseDto) {
-        return null;
+    @PostMapping("/bookRoom")
+    public void book() {
     }
 }

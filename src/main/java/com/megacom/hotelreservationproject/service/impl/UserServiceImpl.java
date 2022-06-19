@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
     private UserMapper userMapper = UserMapper.INSTANCE;
 
     @Override

@@ -18,5 +18,5 @@ public interface ReviewMapper {
 
     List<Review> reviewDtoListToReviewList(List<ReviewDto> reviewDtoList);
 
-    List<ReviewDto> reviewToReviewDto(List<Review> reviewList);
+    List<ReviewDto> reviewListToReviewDtoList(List<Review> reviewList);
 }

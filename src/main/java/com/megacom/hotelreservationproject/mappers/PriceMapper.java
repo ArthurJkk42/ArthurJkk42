@@ -18,5 +18,5 @@ public interface PriceMapper {
 
     List<Price> priceDtoListToPriceList(List<PriceDto> priceDtoList);
 
-    List<PriceDto> priceToPriceDto(List<Price> priceList);
+    List<PriceDto> priceListToPriceDtoList(List<Price> priceList);
 }

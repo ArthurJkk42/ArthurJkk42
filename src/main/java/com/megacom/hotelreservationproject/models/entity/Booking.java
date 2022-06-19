@@ -10,7 +10,9 @@ import java.util.Date;
 @Entity
 @Table(name = "tb_booking")
 public class Booking {
+
     @Id
+    @GeneratedValue
     private Long id;
     @OneToOne
     @JoinColumn(name = "hotel_id")

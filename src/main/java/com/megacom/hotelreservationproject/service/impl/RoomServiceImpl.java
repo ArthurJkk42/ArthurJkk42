@@ -16,6 +16,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Autowired
     private RoomDao roomDao;
+
     private RoomMapper roomMapper = RoomMapper.INSTANCE;
 
     @Override

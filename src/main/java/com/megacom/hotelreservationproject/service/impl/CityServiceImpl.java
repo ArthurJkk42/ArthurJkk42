@@ -22,8 +22,8 @@ public class CityServiceImpl implements CityService {
     private CityDao cityDao;
     private CityServiceImpl cityServiceImpl;
     private HotelDao hotelDao;
-    private CityMapper cityMapper = CityMapper.INSTANCE;
 
+    private CityMapper cityMapper = CityMapper.INSTANCE;
 
     @Override
     public CityDto save(CityDto cityDto) {

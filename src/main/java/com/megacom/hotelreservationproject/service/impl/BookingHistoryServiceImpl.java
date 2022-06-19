@@ -22,9 +22,11 @@ public class BookingHistoryServiceImpl implements BookingHistoryService {
 
     @Autowired
     private BookingHistoryDao bookingHistoryDao;
-    private BookingHistoryMapper bookingHistoryMapper = BookingHistoryMapper.INSTANCE;
+
     private String pattern = "dd.MM.yyyy";
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+    private BookingHistoryMapper bookingHistoryMapper = BookingHistoryMapper.INSTANCE;
 
     @Override
     public BookingHistoryDto save(BookingHistoryDto bookingHistoryDto) {

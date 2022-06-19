@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookingService {
 
-    BookingDto bookByUser(BookingDto bookingDto); // required
+    BookingDto userBook(BookingDto bookingDto); // required
 
     BookingDto bookByHotel(BookingDto bookingDto);
 

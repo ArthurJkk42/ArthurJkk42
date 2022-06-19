@@ -2,9 +2,13 @@ package com.megacom.hotelreservationproject.mappers;
 
 import com.megacom.hotelreservationproject.models.dto.HotelDto;
 import com.megacom.hotelreservationproject.models.entity.Hotel;
+import com.megacom.hotelreservationproject.models.entity.Photo;
 import com.megacom.hotelreservationproject.models.response.HotelResponse;
+import com.megacom.hotelreservationproject.service.PhotoService;
+import com.megacom.hotelreservationproject.service.impl.PhotoServiceImpl;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +24,7 @@ public interface HotelMapper {
 
     List<Hotel> hotelDtoListToHotelList(List<HotelDto> hotelDtoList);
 
-    List<HotelDto> hotelToHotelDto(List<Hotel> hotelList);
+    List<HotelDto> hotelListToHotelDtoList(List<Hotel> hotelList);
 
     default HotelResponse hotelToHotelResponse(Hotel hotel) {
         if (hotel == null) {
@@ -33,11 +37,11 @@ public interface HotelMapper {
         hotelResponse.setDescription(hotel.getDescription());
         hotelResponse.setAddress(hotel.getAddress());
 
-        hotelResponse.setPhotos(hotel.getPhotos().getPhotoLink());
+        PhotoService photoService = new PhotoServiceImpl();
+        String photoLink = photoService.findMainPhoto(hotel); // наименьший порядковый номер фото найти
 
-//        if (list != null) {
-//            hotelResponse.setPhotos(new ArrayList<String>(list));
-//        }
+        hotelResponse.setPhotos(photoLink);
+
         hotelResponse.setCurrentScore(hotel.getCurrentScore());
         return hotelResponse;
     }

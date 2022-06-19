@@ -1,8 +1,10 @@
 package com.megacom.hotelreservationproject.models.entity;
 
+import com.megacom.hotelreservationproject.models.enums.EHotelStatus;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,12 +16,10 @@ public class Hotel {
     private String name;
     private String description;
     private String address;
-    @ManyToOne
-    @JoinColumn(name = "photo_id")
-    private Photo photos;
     private String phone;
     private String email;
-    private boolean isActive;
+    @Enumerated(value = EnumType.STRING)
+    private EHotelStatus hotelStatus;
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;

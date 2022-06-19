@@ -16,11 +16,17 @@ public interface HotelService {
 
     HotelDto delete(HotelDto hotelDto); // required
 
+    HotelDto block(HotelDto hotelDto); // required
+
     HotelDto blockHotel(HotelDto hotelDto); // required
 
     HotelDto findHotelByUser(Long id);
 
+    void countCurrentScore(); // required
+
     List<String> uploadHotelPhotos(); // required
+
+    List<HotelDto> findAllHotels(); // required
 
     ResponseEntity<?> findHotelsByCityIdAndRating(Long cityId); // required
 

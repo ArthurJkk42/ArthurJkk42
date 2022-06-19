@@ -1,7 +1,10 @@
 package com.megacom.hotelreservationproject.service.impl;
 
 import com.megacom.hotelreservationproject.dao.ReviewDao;
+import com.megacom.hotelreservationproject.mappers.HotelMapper;
 import com.megacom.hotelreservationproject.mappers.ReviewMapper;
+import com.megacom.hotelreservationproject.models.dto.HotelDto;
+import com.megacom.hotelreservationproject.models.entity.Hotel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,9 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
     private ReviewDao reviewDao;
-    private ReviewMapper reviewMapper = ReviewMapper.INSTANCE;
+
+    private final ReviewMapper reviewMapper = ReviewMapper.INSTANCE;
+    private final HotelMapper hotelMapper = HotelMapper.INSTANCE;
 
     @Override
     public ReviewDto save(ReviewDto reviewDto) {
@@ -37,10 +42,14 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public ReviewDto reviewAndRate(ReviewDto reviewDto) {
-        Review review = reviewMapper.reviewDtoToReview(reviewDto);
-        Review reviewSaved = reviewDao.save(review);
-        return reviewMapper.reviewToReviewDto(reviewSaved);
+    public List<ReviewDto> findAllByHotelAndActive(HotelDto hotelDto) {
+        Hotel hotel = hotelMapper.hotelDtoToHotel(hotelDto);
+        return reviewMapper.reviewListToReviewDtoList(reviewDao.findAllByActiveTrueAndHotel(hotel));
+    }
+
+    @Override
+    public ReviewDto reviewAndRate(HotelDto hotelDto, double score, String text) {
+        return null;
     }
 
     @Override

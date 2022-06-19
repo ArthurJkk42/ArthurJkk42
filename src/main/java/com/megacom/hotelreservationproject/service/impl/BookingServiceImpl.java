@@ -20,7 +20,7 @@ public class BookingServiceImpl implements BookingService {
     private BookingMapper bookingMapper = BookingMapper.INSTANCE;
 
     @Override
-    public BookingDto bookByUser(BookingDto bookingDto) {
+    public BookingDto userBook(BookingDto bookingDto) {
         Booking booking = bookingMapper.bookingDtoToBooking(bookingDto);
         booking.setStatus(EBookingStatus.BOOKED_BY_USER);
         Booking bookingSaved =bookingDao.save(booking);

@@ -15,8 +15,15 @@ public class AdminController {
     @Autowired
     private HotelService hotelService;
 
-    @PostMapping("/delete")
+    @PostMapping("/deleteHotel")
     public HotelDto delete(@RequestBody HotelDto hotelDto) {
         return hotelService.delete(hotelDto);
     }
+
+    @PostMapping("/blockHotel")
+    public HotelDto block(@RequestBody HotelDto hotelDto) {
+        return hotelService.block(hotelDto);
+    }
+
+//    @PostMapping("/giveRights")
 }

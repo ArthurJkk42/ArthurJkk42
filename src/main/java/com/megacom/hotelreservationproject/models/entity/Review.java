@@ -14,7 +14,7 @@ public class Review {
     private Long id;
     @OneToOne
     @JoinColumn(name = "guest_id")
-    private User guest;
+    private User user;
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;

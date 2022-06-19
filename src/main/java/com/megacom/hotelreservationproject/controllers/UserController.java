@@ -1,10 +1,9 @@
 package com.megacom.hotelreservationproject.controllers;
 
-import com.megacom.hotelreservationproject.dao.ReviewDao;
 import com.megacom.hotelreservationproject.models.dto.BookingDto;
 import com.megacom.hotelreservationproject.models.dto.HotelDto;
 import com.megacom.hotelreservationproject.models.dto.ReviewDto;
-import com.megacom.hotelreservationproject.models.response.HotelResponse;
+import com.megacom.hotelreservationproject.models.enums.EBedType;
 import com.megacom.hotelreservationproject.service.BookingService;
 import com.megacom.hotelreservationproject.service.HotelService;
 import com.megacom.hotelreservationproject.service.ReviewService;
@@ -23,29 +22,45 @@ public class UserController {
     private BookingService bookingService;
     private ReviewService reviewService;
 
-    @GetMapping("/search")
-    private ResponseEntity<?> search(@RequestParam Long cityId) {
+    @GetMapping("/searchForHotels")
+    public ResponseEntity<?> search(@RequestParam Long cityId) {
         return hotelService.findHotelsByCityIdAndRating(cityId);
     }
 
-    @GetMapping("/filter")
-        private ResponseEntity<?> filter(@RequestParam Long cityId, Date checkInDate, Date checkOutDate,
+    @GetMapping("/filterSearch")
+        public ResponseEntity<?> filter(@RequestParam Long cityId,
+                                         Date checkInDate, Date checkOutDate,
                                          int guestCount, int roomCount) {
         return null;
     }
 
-    @PostMapping("/book")
-    public BookingDto book(@RequestBody BookingDto bookingDto) {
-        return bookingService.bookByUser(bookingDto);
+    @GetMapping("/filterByRating")
+    public HotelDto filterRating(@RequestParam double score) {
+        return null;
     }
 
-    @PostMapping("/cancel")
-    public BookingDto cancel(@RequestBody BookingDto bookingDto) {
+    @GetMapping("/filterByBed")
+    public HotelDto filterBed(@RequestParam EBedType bedType) {
+        return null;
+    }
+
+    @GetMapping("/getAvailableRoomOptions")
+    public HotelDto getAvailableRoomOptions() {
+        return null;
+    }
+
+    @PostMapping("/bookRoom")
+    public BookingDto bookRoom(@RequestBody BookingDto bookingDto) {
+        return bookingService.userBook(bookingDto);
+    }
+
+    @PostMapping("/cancelBooking")
+    public BookingDto cancelBooking(@RequestBody BookingDto bookingDto) {
         return bookingService.cancelBookingByUser(bookingDto);
     }
 
-    @PostMapping("/review")
-    public ReviewDto review(@RequestBody ReviewDto reviewDto) {
-        return reviewService.reviewAndRate(reviewDto);
+    @PostMapping("/reviewFeedback")
+    public ReviewDto reviewFeedback(@RequestParam HotelDto hotelDto, double score, String text) {
+        return reviewService.reviewAndRate(hotelDto, score, text);
     }
 }

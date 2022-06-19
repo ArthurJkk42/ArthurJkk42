@@ -1,5 +1,6 @@
 package com.megacom.hotelreservationproject.service;
 
+import com.megacom.hotelreservationproject.models.dto.HotelDto;
 import com.megacom.hotelreservationproject.models.dto.ReviewDto;
 
 import java.util.List;
@@ -12,7 +13,9 @@ public interface ReviewService {
 
     ReviewDto delete(ReviewDto reviewDto);
 
-    ReviewDto reviewAndRate(ReviewDto reviewDto); // required
+    List<ReviewDto>findAllByHotelAndActive(HotelDto hotelDto);
+
+    ReviewDto reviewAndRate(HotelDto hotelDto, double score, String text); // required
 
     List<ReviewDto> findByGuestId(Long id);
 

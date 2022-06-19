@@ -2,11 +2,15 @@ package com.megacom.hotelreservationproject.service.impl;
 
 import com.megacom.hotelreservationproject.dao.HotelDao;
 import com.megacom.hotelreservationproject.mappers.HotelMapper;
+import com.megacom.hotelreservationproject.mappers.PhotoMapper;
 import com.megacom.hotelreservationproject.models.dto.CityDto;
 import com.megacom.hotelreservationproject.models.dto.HotelDto;
+import com.megacom.hotelreservationproject.models.dto.ReviewDto;
 import com.megacom.hotelreservationproject.models.entity.Hotel;
+import com.megacom.hotelreservationproject.models.enums.EHotelStatus;
 import com.megacom.hotelreservationproject.models.response.HotelResponse;
 import com.megacom.hotelreservationproject.service.HotelService;
+import com.megacom.hotelreservationproject.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +23,18 @@ import java.util.List;
 @Service
 public class HotelServiceImpl implements HotelService {
 
-
     @Autowired
     private HotelDao hotelDao;
-    private HotelMapper hotelMapper = HotelMapper.INSTANCE;
     private CityServiceImpl cityService;
+    private ReviewService reviewService;
+
+    private final HotelMapper hotelMapper = HotelMapper.INSTANCE;
+    private final PhotoMapper photoMapper = PhotoMapper.INSTANCE;
 
     @Override
     public HotelDto save(HotelDto hotelDto) {
         Hotel hotel = hotelMapper.hotelDtoToHotel(hotelDto);
-        hotel.setActive(true);
+        hotel.setHotelStatus(EHotelStatus.ACTIVE);
         Hotel hotelSaved = hotelDao.save(hotel);
         return hotelMapper.hotelToHotelDto(hotelSaved);
     }
@@ -54,7 +60,15 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public HotelDto delete(HotelDto hotelDto) {
         Hotel hotel = hotelMapper.hotelDtoToHotel(hotelDto);
-        hotel.setActive(false);
+        hotel.setHotelStatus(EHotelStatus.DELETED);
+        HotelDto deletedHotel = update(hotelMapper.hotelToHotelDto(hotel));
+        return deletedHotel;
+    }
+
+    @Override
+    public HotelDto block(HotelDto hotelDto) {
+        Hotel hotel = hotelMapper.hotelDtoToHotel(hotelDto);
+        hotel.setHotelStatus(EHotelStatus.BLOCKED);
         HotelDto deletedHotel = update(hotelMapper.hotelToHotelDto(hotel));
         return deletedHotel;
     }
@@ -70,8 +84,29 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
+    public void countCurrentScore() {
+    List<HotelDto>hotelDtoList = findAllHotels();
+    hotelDtoList.stream().forEach(x -> {
+        List<ReviewDto> reviewDtoList = reviewService.findAllByHotelAndActive(x);
+        Double sum = reviewDtoList.stream().mapToDouble(ReviewDto::getScore).sum();
+        Double currentScore = Math.round((sum / reviewDtoList.size())/10.0) * 10.0;
+
+        // на случай если double округление не работает
+        String result = String.format("%.1f", currentScore);
+
+        x.setCurrentScore(currentScore);
+        update(x);
+    });
+    }
+
+    @Override
     public List<String> uploadHotelPhotos() {
         return null;
+    }
+
+    @Override
+    public List<HotelDto> findAllHotels() {
+        return hotelMapper.hotelListToHotelDtoList(hotelDao.findAll());
     }
 
     @Override

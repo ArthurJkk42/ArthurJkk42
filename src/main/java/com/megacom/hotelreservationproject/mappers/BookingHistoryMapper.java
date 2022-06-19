@@ -18,5 +18,5 @@ public interface BookingHistoryMapper {
 
     List<BookingHistory> bookingHistoryDtoListToBookingHistoryList(List<BookingHistoryDto> bookingHistoryDtoList);
 
-    List<BookingHistoryDto> bookingHistoryToBookingHistoryDto(List<BookingHistory> bookingHistoryList);
+    List<BookingHistoryDto> bookingHistoryListToBookingHistoryDtoList(List<BookingHistory> bookingHistoryList);
 }
