@@ -17,10 +17,11 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     private BookingDao bookingDao;
+
     private BookingMapper bookingMapper = BookingMapper.INSTANCE;
 
     @Override
-    public BookingDto userBook(BookingDto bookingDto) {
+    public BookingDto saveByUser(BookingDto bookingDto) {
         Booking booking = bookingMapper.bookingDtoToBooking(bookingDto);
         booking.setStatus(EBookingStatus.BOOKED_BY_USER);
         Booking bookingSaved =bookingDao.save(booking);
@@ -28,7 +29,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public BookingDto bookByHotel(BookingDto bookingDto) {
+    public BookingDto saveByHotel(BookingDto bookingDto) {
         Booking booking = bookingMapper.bookingDtoToBooking(bookingDto);
         booking.setStatus(EBookingStatus.BOOKED_BY_HOTEL);
         Booking bookingSaved =bookingDao.save(booking);
@@ -82,11 +83,6 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public BookingDto findBookingByHotelId(Long id) {
-        return null;
-    }
-
-    @Override
-    public BookingDto bookRoom() {
         return null;
     }
 

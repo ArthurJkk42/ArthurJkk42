@@ -24,8 +24,6 @@ public interface HotelService {
 
     void countCurrentScore(); // required
 
-    List<String> uploadHotelPhotos(); // required
-
     List<HotelDto> findAllHotels(); // required
 
     ResponseEntity<?> findHotelsByCityIdAndRating(Long cityId); // required

@@ -20,7 +20,7 @@ public class CityServiceImpl implements CityService {
 
     @Autowired
     private CityDao cityDao;
-    private CityServiceImpl cityServiceImpl;
+    @Autowired
     private HotelDao hotelDao;
 
     private CityMapper cityMapper = CityMapper.INSTANCE;
@@ -50,7 +50,14 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public CityDto update(CityDto cityDto) {
-        return null;
+        boolean ifExists = cityDao.existsById(cityDto.getId());
+        if (!ifExists) {
+            return null;
+        } else {
+            City city = cityMapper.cityDtoToCity(cityDto);
+            City updatedCity = cityDao.save(city);
+            return cityMapper.cityToCityDto(updatedCity);
+        }
     }
 
     @Override

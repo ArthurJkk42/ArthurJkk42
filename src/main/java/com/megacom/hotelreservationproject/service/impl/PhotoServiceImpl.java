@@ -3,7 +3,6 @@ package com.megacom.hotelreservationproject.service.impl;
 import com.megacom.hotelreservationproject.dao.PhotoDao;
 import com.megacom.hotelreservationproject.mappers.HotelMapper;
 import com.megacom.hotelreservationproject.mappers.PhotoMapper;
-import com.megacom.hotelreservationproject.models.dto.HotelDto;
 import com.megacom.hotelreservationproject.models.dto.PhotoDto;
 import com.megacom.hotelreservationproject.models.entity.Hotel;
 import com.megacom.hotelreservationproject.models.entity.Photo;
@@ -18,10 +17,18 @@ import java.util.List;
 @Service
 public class PhotoServiceImpl implements PhotoService {
 
-    @Autowired private PhotoDao photoDao;
+    @Autowired
+    private PhotoDao photoDao;
 
-    private HotelMapper hotelMapper = HotelMapper.INSTANCE;
-    private PhotoMapper photoMapper = PhotoMapper.INSTANCE;
+    private final HotelMapper hotelMapper = HotelMapper.INSTANCE;
+    private final PhotoMapper photoMapper = PhotoMapper.INSTANCE;
+
+
+    @Override
+    public Photo uploadPhoto(Photo photo) {
+        Photo savedPhoto = photoDao.save(photo);
+        return savedPhoto;
+    }
 
     @Override
     public PhotoDto findById(Long id) {
@@ -33,6 +40,11 @@ public class PhotoServiceImpl implements PhotoService {
     public List<PhotoDto> findAllPhotosByHotel(Hotel hotel) {
         List<Photo> photoList = photoDao.findAllPhotoByHotel(hotel);
         return photoMapper.photoListToPhotoDtoList(photoList);
+    }
+
+    @Override
+    public List<PhotoDto> uploadPhotos(List<PhotoDto> photoDto) {
+        return null;
     }
 
     @Override

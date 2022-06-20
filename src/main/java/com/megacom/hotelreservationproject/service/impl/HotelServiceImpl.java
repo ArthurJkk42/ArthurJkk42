@@ -25,7 +25,9 @@ public class HotelServiceImpl implements HotelService {
 
     @Autowired
     private HotelDao hotelDao;
+    @Autowired
     private CityServiceImpl cityService;
+    @Autowired
     private ReviewService reviewService;
 
     private final HotelMapper hotelMapper = HotelMapper.INSTANCE;
@@ -51,7 +53,7 @@ public class HotelServiceImpl implements HotelService {
     if (!isExists) {
         return null;
     } else {
-        Hotel hotel =hotelMapper.hotelDtoToHotel(hotelDto);
+        Hotel hotel = hotelMapper.hotelDtoToHotel(hotelDto);
         Hotel updatedHotel = hotelDao.save(hotel);
         return hotelMapper.hotelToHotelDto(updatedHotel);
         }
@@ -97,11 +99,6 @@ public class HotelServiceImpl implements HotelService {
         x.setCurrentScore(currentScore);
         update(x);
     });
-    }
-
-    @Override
-    public List<String> uploadHotelPhotos() {
-        return null;
     }
 
     @Override

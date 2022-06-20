@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface BookingService {
 
-    BookingDto userBook(BookingDto bookingDto); // required
+    BookingDto saveByUser(BookingDto bookingDto); // required
 
-    BookingDto bookByHotel(BookingDto bookingDto);
+    BookingDto saveByHotel(BookingDto bookingDto);
 
     BookingDto findById(Long id); // required
 
@@ -20,8 +20,6 @@ public interface BookingService {
     BookingDto cancelBookingByUser(BookingDto bookingDto);
 
     BookingDto findBookingByHotelId(Long id);
-
-    BookingDto bookRoom(); // required
 
     BookingDto cancelBookingRoom(); // required
 

@@ -15,6 +15,7 @@ public class PriceServiceImpl implements PriceService {
 
     @Autowired
     private PriceDao priceDao;
+
     private PriceMapper priceMapper = PriceMapper.INSTANCE;
 
     @Override
@@ -42,7 +43,14 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public PriceDto update(PriceDto priceDto) {
-        return null;
+        boolean isExists = priceDao.existsById(priceDto.getId());
+        if (!isExists) {
+            return null;
+        } else {
+            Price price = priceMapper.priceDtoToPrice(priceDto);
+            Price updatedPrice = priceDao.save(price);
+            return priceMapper.priceToPriceDto(price);
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.megacom.hotelreservationproject.service.impl;
 
+import com.megacom.hotelreservationproject.dao.HotelDao;
 import com.megacom.hotelreservationproject.dao.ReviewDao;
 import com.megacom.hotelreservationproject.mappers.HotelMapper;
 import com.megacom.hotelreservationproject.mappers.ReviewMapper;
@@ -12,6 +13,10 @@ import com.megacom.hotelreservationproject.models.dto.ReviewDto;
 import com.megacom.hotelreservationproject.models.entity.Review;
 import com.megacom.hotelreservationproject.service.ReviewService;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,13 +24,21 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
     private ReviewDao reviewDao;
+    @Autowired
+    private HotelDao hotelDao;
 
     private final ReviewMapper reviewMapper = ReviewMapper.INSTANCE;
     private final HotelMapper hotelMapper = HotelMapper.INSTANCE;
 
     @Override
-    public ReviewDto save(ReviewDto reviewDto) {
+    public ReviewDto save(ReviewDto reviewDto) throws ParseException {
         Review review = reviewMapper.reviewDtoToReview(reviewDto);
+
+        String currentDate = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+        Date convertedCurrentDate = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").parse(currentDate);
+
+        review.setReviewDate(convertedCurrentDate);
+
         Review reviewSaved = reviewDao.save(review);
         return reviewMapper.reviewToReviewDto(reviewSaved);
     }
@@ -48,8 +61,13 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public ReviewDto reviewAndRate(HotelDto hotelDto, double score, String text) {
-        return null;
+    public ReviewDto reviewAndRate(HotelDto hotelDto, ReviewDto reviewDto) throws ParseException {
+        boolean isExists = hotelDao.existsById(hotelDto.getId());
+        if (!isExists) {
+            return null;
+        } else {
+            return save(reviewDto);
+        }
     }
 
     @Override

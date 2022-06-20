@@ -23,7 +23,7 @@ public class BookingHistoryServiceImpl implements BookingHistoryService {
     @Autowired
     private BookingHistoryDao bookingHistoryDao;
 
-    private String pattern = "dd.MM.yyyy";
+    private final String pattern = "dd.MM.yyyy";
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
     private BookingHistoryMapper bookingHistoryMapper = BookingHistoryMapper.INSTANCE;

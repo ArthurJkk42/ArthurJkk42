@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.Date;
 
 @RestController
@@ -19,7 +20,9 @@ public class UserController {
 
     @Autowired
     private HotelService hotelService;
+    @Autowired
     private BookingService bookingService;
+    @Autowired
     private ReviewService reviewService;
 
     @GetMapping("/searchForHotels")
@@ -49,9 +52,14 @@ public class UserController {
         return null;
     }
 
-    @PostMapping("/bookRoom")
+    @PostMapping("/book")
     public BookingDto bookRoom(@RequestBody BookingDto bookingDto) {
-        return bookingService.userBook(bookingDto);
+        return bookingService.saveByUser(bookingDto);
+    }
+
+    @PostMapping("/updateBooking")
+    public BookingDto updateBooking(@RequestBody BookingDto bookingDto) {
+        return bookingService.update(bookingDto);
     }
 
     @PostMapping("/cancelBooking")
@@ -60,7 +68,7 @@ public class UserController {
     }
 
     @PostMapping("/reviewFeedback")
-    public ReviewDto reviewFeedback(@RequestParam HotelDto hotelDto, double score, String text) {
-        return reviewService.reviewAndRate(hotelDto, score, text);
+    public ReviewDto reviewFeedback(@RequestBody HotelDto hotelDto, ReviewDto reviewDto) throws ParseException {
+        return reviewService.reviewAndRate(hotelDto, reviewDto);
     }
 }
