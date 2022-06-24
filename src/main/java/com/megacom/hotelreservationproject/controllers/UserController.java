@@ -31,9 +31,9 @@ public class UserController {
     }
 
     @GetMapping("/filterSearch")
-        public ResponseEntity<?> filter(@RequestParam Long cityId,
-                                         Date checkInDate, Date checkOutDate,
-                                         int guestCount, int roomCount) {
+    public ResponseEntity<?> filterByCity(@RequestParam Long cityId,
+                                          Date checkInDate, Date checkOutDate,
+                                          int guestCount, int roomCount) {
         return null;
     }
 
@@ -68,7 +68,12 @@ public class UserController {
     }
 
     @PostMapping("/reviewFeedback")
-    public ReviewDto reviewFeedback(@RequestBody HotelDto hotelDto, ReviewDto reviewDto) throws ParseException {
-        return reviewService.reviewAndRate(hotelDto, reviewDto);
+    public ReviewDto reviewFeedback(@RequestParam Long hotelId, @RequestBody ReviewDto reviewDto) throws ParseException {
+        return reviewService.reviewAndRate(hotelId, reviewDto);
+    }
+
+    @PostMapping("/editReview")
+    public ReviewDto editReview(@RequestBody ReviewDto reviewDto) throws ParseException {
+        return reviewService.editReview(reviewDto);
     }
 }

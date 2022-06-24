@@ -1,6 +1,5 @@
 package com.megacom.hotelreservationproject.service;
 
-import com.megacom.hotelreservationproject.models.dto.ReviewDto;
 import com.megacom.hotelreservationproject.models.dto.ReviewResponseDto;
 import com.megacom.hotelreservationproject.models.entity.ReviewResponse;
 
@@ -15,7 +14,7 @@ public interface ReviewResponseService {
 
     ReviewResponseDto update(ReviewResponseDto reviewResponse);
 
-    ReviewResponseDto reviewRespond(ReviewDto reviewDto, ReviewResponseDto reviewResponseDto) throws ParseException; // required
+    ReviewResponseDto reviewRespond(Long reviewId, ReviewResponseDto reviewResponseDto) throws ParseException; // required
 
     ReviewResponseDto editResponseToReview(ReviewResponseDto reviewResponseDto) throws ParseException;
 

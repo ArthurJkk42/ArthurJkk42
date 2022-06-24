@@ -1,6 +1,7 @@
 package com.megacom.hotelreservationproject.service;
 
 import com.megacom.hotelreservationproject.models.dto.HotelDto;
+import com.megacom.hotelreservationproject.models.entity.Hotel;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
@@ -14,11 +15,11 @@ public interface HotelService {
 
     HotelDto update(HotelDto hotelDto);
 
+    HotelDto setActive(HotelDto hotelDto);
+
     HotelDto delete(HotelDto hotelDto); // required
 
     HotelDto block(HotelDto hotelDto); // required
-
-    HotelDto blockHotel(HotelDto hotelDto); // required
 
     HotelDto findHotelByUser(Long id);
 
@@ -27,6 +28,10 @@ public interface HotelService {
     List<HotelDto> findAllHotels(); // required
 
     ResponseEntity<?> findHotelsByCityIdAndRating(Long cityId); // required
+
+    ResponseEntity<?> filterByCity(Long cityId,
+                                   Date checkInDate, Date checkOutDate,
+                                   int guestCount, int roomCount);
 
     List<HotelDto> findConvenientHotelsByDate(Date CheckInDate, Date checkOutDate); // required
 

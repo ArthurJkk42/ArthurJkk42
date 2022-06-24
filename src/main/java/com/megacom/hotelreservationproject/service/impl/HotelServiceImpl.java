@@ -60,24 +60,42 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
+    public HotelDto setActive(HotelDto hotelDto) {
+        boolean isExists = hotelDao.existsById(hotelDto.getId());
+        if (!isExists) {
+            return null;
+        } else {
+            Hotel hotel = hotelMapper.hotelDtoToHotel(hotelDto);
+            hotel.setHotelStatus(EHotelStatus.ACTIVE);
+            HotelDto activatedHotel = update(hotelMapper.hotelToHotelDto(hotel));
+            return activatedHotel;
+        }
+    }
+
+    @Override
     public HotelDto delete(HotelDto hotelDto) {
-        Hotel hotel = hotelMapper.hotelDtoToHotel(hotelDto);
-        hotel.setHotelStatus(EHotelStatus.DELETED);
-        HotelDto deletedHotel = update(hotelMapper.hotelToHotelDto(hotel));
-        return deletedHotel;
+        boolean isExists = hotelDao.existsById(hotelDto.getId());
+        if (!isExists) {
+            return null;
+        } else {
+            Hotel hotel = hotelMapper.hotelDtoToHotel(hotelDto);
+            hotel.setHotelStatus(EHotelStatus.DELETED);
+            HotelDto deletedHotel = update(hotelMapper.hotelToHotelDto(hotel));
+            return deletedHotel;
+        }
     }
 
     @Override
     public HotelDto block(HotelDto hotelDto) {
-        Hotel hotel = hotelMapper.hotelDtoToHotel(hotelDto);
-        hotel.setHotelStatus(EHotelStatus.BLOCKED);
-        HotelDto deletedHotel = update(hotelMapper.hotelToHotelDto(hotel));
-        return deletedHotel;
-    }
-
-    @Override
-    public HotelDto blockHotel(HotelDto hotelDto) {
-        return null;
+        boolean isExists = hotelDao.existsById(hotelDto.getId());
+        if (!isExists) {
+            return null;
+        } else {
+            Hotel hotel = hotelMapper.hotelDtoToHotel(hotelDto);
+            hotel.setHotelStatus(EHotelStatus.BLOCKED);
+            HotelDto deletedHotel = update(hotelMapper.hotelToHotelDto(hotel));
+            return deletedHotel;
+        }
     }
 
     @Override
@@ -118,6 +136,19 @@ public class HotelServiceImpl implements HotelService {
                 .sorted(Comparator.comparingDouble(HotelResponse::getCurrentScore))
                 .forEach(p -> hotelResponses.add(p));
         return new ResponseEntity<>(hotelList, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> filterByCity(Long cityId, Date checkInDate,
+                                          Date checkOutDate, int guestCount, int roomCount) {
+        CityDto cityDto = cityService.findById(cityId);
+        if (cityDto == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND); // null, 404
+        }
+        List<Hotel> hotelList = hotelDao.findHotelsByCityId(cityId);
+        hotelList.stream().forEach(x -> {
+        });
+        return null;
     }
 
     @Override

@@ -61,11 +61,22 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public ReviewDto reviewAndRate(HotelDto hotelDto, ReviewDto reviewDto) throws ParseException {
-        boolean isExists = hotelDao.existsById(hotelDto.getId());
+    public ReviewDto reviewAndRate(Long hotelId, ReviewDto reviewDto) throws ParseException {
+        boolean isExists = hotelDao.existsById(hotelId);
         if (!isExists) {
             return null;
         } else {
+            return save(reviewDto);
+        }
+    }
+
+    @Override
+    public ReviewDto editReview(ReviewDto reviewDto) throws ParseException {
+        boolean isExists = reviewDao.existsById(reviewDto.getId());
+        if (!isExists) {
+            return null;
+        }
+        else {
             return save(reviewDto);
         }
     }

@@ -16,7 +16,9 @@ public interface ReviewService {
 
     List<ReviewDto>findAllByHotelAndActive(HotelDto hotelDto);
 
-    ReviewDto reviewAndRate(HotelDto hotelDto, ReviewDto reviewDto) throws ParseException; // required
+    ReviewDto reviewAndRate(Long hotelId, ReviewDto reviewDto) throws ParseException; // required
+
+    ReviewDto editReview(ReviewDto reviewDto) throws ParseException;
 
     List<ReviewDto> findByGuestId(Long id);
 

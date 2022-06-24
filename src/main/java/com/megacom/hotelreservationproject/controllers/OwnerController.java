@@ -2,7 +2,6 @@ package com.megacom.hotelreservationproject.controllers;
 
 import com.megacom.hotelreservationproject.models.dto.*;
 import com.megacom.hotelreservationproject.service.*;
-import org.aspectj.weaver.patterns.HasThisTypePatternTriedToSneakInSomeGenericOrParameterizedTypePatternMatchingStuffAnywhereVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,32 +24,32 @@ public class OwnerController {
     @Autowired
     private PriceService priceService;
 
-    @PostMapping("/saveHotel")
+    @PostMapping("/saveHotel") // works
     public HotelDto saveHotel(@RequestBody HotelDto hotelDto) {
         return hotelService.save(hotelDto);
     }
 
-    @PostMapping("/updateHotel")
+    @PostMapping("/updateHotel") // works
     public HotelDto updateHotel(@RequestBody HotelDto hotelDto) {
         return hotelService.update(hotelDto);
     }
 
     @PostMapping("/saveRoom")
-    public RoomDto saveRoom(@RequestBody RoomDto roomDto) {
-        return roomService.save(roomDto);
+    public RoomDto saveRoom(@RequestBody RoomDto roomDto, PriceDto priceDto) {
+        return roomService.save(roomDto, priceDto);
     }
 
     @PostMapping("/updateRoom")
-    public RoomDto updateRoom(@RequestBody RoomDto roomDto) {
-        return roomService.update(roomDto);
+    public RoomDto updateRoom(@RequestBody RoomDto roomDto, PriceDto priceDto) {
+        return roomService.update(roomDto, priceDto);
     }
 
-    @PostMapping("/saveCity")
+    @PostMapping("/saveCity") // works
     public CityDto saveCity(@RequestBody CityDto cityDto) {
         return cityService.save(cityDto);
     }
 
-    @PostMapping("updateCity")
+    @PostMapping("updateCity") // works
     public CityDto updateCity(@RequestBody CityDto cityDto) {
         return cityService.update(cityDto);
     }
@@ -71,8 +70,8 @@ public class OwnerController {
     }
 
     @PostMapping("/respondToReview")
-    public ReviewResponseDto respondToReview(@RequestBody ReviewDto reviewDto, ReviewResponseDto reviewResponseDto) throws ParseException {
-        return reviewResponseService.reviewRespond(reviewDto, reviewResponseDto);
+    public ReviewResponseDto respondToReview(@RequestParam Long reviewId, ReviewResponseDto reviewResponseDto) throws ParseException {
+        return reviewResponseService.reviewRespond(reviewId, reviewResponseDto);
     }
 
     // throws ParseException мб нужно удалить

@@ -25,5 +25,10 @@ public class AdminController {
         return hotelService.block(hotelDto);
     }
 
+    @PostMapping("/setActive")
+    public HotelDto setActive(@RequestBody HotelDto hotelDto) {
+        return hotelService.setActive(hotelDto);
+    }
+
 //    @PostMapping("/giveRights")
 }

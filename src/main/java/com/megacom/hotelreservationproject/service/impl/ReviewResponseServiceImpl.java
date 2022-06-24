@@ -51,8 +51,8 @@ public class ReviewResponseServiceImpl implements ReviewResponseService {
     }
 
     @Override
-    public ReviewResponseDto reviewRespond(ReviewDto reviewDto, ReviewResponseDto reviewResponseDto) throws ParseException {
-        boolean isExists = reviewDao.existsById(reviewDto.getId());
+    public ReviewResponseDto reviewRespond(Long reviewId, ReviewResponseDto reviewResponseDto) throws ParseException {
+        boolean isExists = reviewDao.existsById(reviewId);
         if (!isExists) {
             return null;
         } else {

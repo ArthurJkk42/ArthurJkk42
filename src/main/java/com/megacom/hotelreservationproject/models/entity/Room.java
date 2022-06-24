@@ -14,7 +14,6 @@ public class Room {
     @Id
     @GeneratedValue
     private Long id;
-
     private int capacity;
     @Enumerated(value = EnumType.STRING)
     private EBedType bedType;
