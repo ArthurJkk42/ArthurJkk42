@@ -1,12 +1,11 @@
 package com.megacom.hotelreservationproject.service.impl;
 
+import com.megacom.hotelreservationproject.dao.HotelDao;
 import com.megacom.hotelreservationproject.dao.PriceDao;
 import com.megacom.hotelreservationproject.dao.RoomDao;
 import com.megacom.hotelreservationproject.mappers.PriceMapper;
 import com.megacom.hotelreservationproject.mappers.RoomMapper;
-import com.megacom.hotelreservationproject.models.dto.PriceDto;
 import com.megacom.hotelreservationproject.models.dto.RoomDto;
-import com.megacom.hotelreservationproject.models.entity.Price;
 import com.megacom.hotelreservationproject.models.entity.Room;
 import com.megacom.hotelreservationproject.models.enums.EBedType;
 import com.megacom.hotelreservationproject.service.PriceService;
@@ -24,20 +23,20 @@ public class RoomServiceImpl implements RoomService {
     private PriceService priceService;
     @Autowired
     private PriceDao priceDao;
+    @Autowired
+    private HotelDao hotelDao;
 
 
     private PriceMapper priceMapper = PriceMapper.INSTANCE;
     private RoomMapper roomMapper = RoomMapper.INSTANCE;
 
     @Override
-    public RoomDto save(RoomDto roomDto, PriceDto priceDto) {
+    public RoomDto save(RoomDto roomDto) {
             Room room = roomMapper.roomDtoToRoom(roomDto);
             Room roomSaved = roomDao.save(room);
-
-            priceService.save(priceDto);
-
             return roomMapper.roomToRoomDto(roomSaved);
     }
+
 
     @Override
     public RoomDto findById(Long id) {
@@ -46,10 +45,15 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDto update(RoomDto roomDto, PriceDto priceDto) {
+    public RoomDto update(RoomDto roomDto) {
+        boolean isExists = hotelDao.existsById(roomDto.getHotel().getId());
+        if (!isExists) {
+            return null;
+        } else {
             Room room = roomMapper.roomDtoToRoom(roomDto);
             Room updatedRoom = roomDao.save(room);
             return roomMapper.roomToRoomDto(updatedRoom);
+        }
     }
 
     @Override

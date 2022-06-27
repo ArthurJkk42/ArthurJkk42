@@ -56,7 +56,7 @@ public class HotelServiceImpl implements HotelService {
         Hotel hotel = hotelMapper.hotelDtoToHotel(hotelDto);
         Hotel updatedHotel = hotelDao.save(hotel);
         return hotelMapper.hotelToHotelDto(updatedHotel);
-        }
+    }
     }
 
     @Override

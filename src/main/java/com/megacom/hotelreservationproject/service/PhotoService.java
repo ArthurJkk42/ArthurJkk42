@@ -2,7 +2,6 @@ package com.megacom.hotelreservationproject.service;
 
 import com.megacom.hotelreservationproject.models.dto.PhotoDto;
 import com.megacom.hotelreservationproject.models.entity.Hotel;
-import com.megacom.hotelreservationproject.models.entity.Photo;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ public interface PhotoService {
 
 
 
-    Photo uploadPhoto(Photo photo);
+    PhotoDto save(PhotoDto photoDto);
 
     PhotoDto findById(Long id);
 

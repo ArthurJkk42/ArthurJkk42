@@ -16,6 +16,6 @@ public class Price {
     private Date startDate;
     private Date endDate;
     @ManyToOne
-    @JoinColumn(name = "room_id")
-    private Room room;
+    @JoinColumn(name = "room_category_id")
+    private RoomCategory roomCategory;
 }

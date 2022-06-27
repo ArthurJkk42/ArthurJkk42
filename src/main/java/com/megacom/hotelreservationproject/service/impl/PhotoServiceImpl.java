@@ -19,15 +19,16 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Autowired
     private PhotoDao photoDao;
+    private final PhotoMapper photoMapper = PhotoMapper.INSTANCE;
 
     private final HotelMapper hotelMapper = HotelMapper.INSTANCE;
-    private final PhotoMapper photoMapper = PhotoMapper.INSTANCE;
 
 
     @Override
-    public Photo uploadPhoto(Photo photo) {
+    public PhotoDto save(PhotoDto photoDto) {
+        Photo photo = photoMapper.photoDtoToPhoto(photoDto);
         Photo savedPhoto = photoDao.save(photo);
-        return savedPhoto;
+        return photoMapper.photoToPhotoDto(savedPhoto);
     }
 
     @Override

@@ -1,11 +1,16 @@
 package com.megacom.hotelreservationproject.controllers;
 
 import com.megacom.hotelreservationproject.models.dto.*;
+import com.megacom.hotelreservationproject.request.RoomCategoryAndPriceRequest;
+import com.megacom.hotelreservationproject.request.RoomCategoryAndPriceRequestWithId;
 import com.megacom.hotelreservationproject.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/owner")
@@ -23,6 +28,10 @@ public class OwnerController {
     private ReviewResponseService reviewResponseService;
     @Autowired
     private PriceService priceService;
+    @Autowired
+    private FileService fileService;
+    @Autowired
+    private RoomAndPriceService roomAndPriceService;
 
     @PostMapping("/saveHotel") // works
     public HotelDto saveHotel(@RequestBody HotelDto hotelDto) {
@@ -35,13 +44,13 @@ public class OwnerController {
     }
 
     @PostMapping("/saveRoom")
-    public RoomDto saveRoom(@RequestBody RoomDto roomDto, PriceDto priceDto) {
-        return roomService.save(roomDto, priceDto);
+    public List<Object> saveRoom(@RequestBody RoomCategoryAndPriceRequest roomAndPriceRequest) {
+        return roomAndPriceService.save(roomAndPriceRequest);
     }
 
-    @PostMapping("/updateRoom")
-    public RoomDto updateRoom(@RequestBody RoomDto roomDto, PriceDto priceDto) {
-        return roomService.update(roomDto, priceDto);
+    @PostMapping("/updateRoomCategory")
+    public List<Object> updateRoom(@RequestBody RoomCategoryAndPriceRequestWithId roomAndPriceRequestWithId) {
+        return roomAndPriceService.updateRoomCategory(roomAndPriceRequestWithId);
     }
 
     @PostMapping("/saveCity") // works
@@ -54,9 +63,9 @@ public class OwnerController {
         return cityService.update(cityDto);
     }
 
-    @PostMapping("/uploadPhotos")
-    public PhotoDto uploadPhotos(@RequestBody PhotoDto photoDto) {
-        return null;
+    @PostMapping("/uploadImage")
+    public ResponseEntity<?> uploadImageToHotel(@RequestParam MultipartFile file, @RequestParam Long hotelId, @RequestParam int orderNum) {
+        return fileService.uploadImageToHotel(file, hotelId, orderNum);
     }
 
     @PostMapping("/updatePhotos")
